@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="Viewport" content="width=device-width , initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link href='//fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+  <title>
+    {% block title %}
+    Home
+    {% endblock %}
+  </title>
+</head>
+
+<body>
+
+  <nav id="mainnav" class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+      <strong>
+        <p style="font-size: 40px;"><a href="{% url 'products:products_list' %}"
+            class="navbar-brand text-Secondary mx-5" style=" font-size:30px;">My<span
+              class="text-success">Nursery</span><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+              fill="currentColor" class="bi bi-tree-fill text-success" viewBox="0 0 16 16">
+              <path
+                d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777l-3-4.5z" />
+            </svg></a></p>
+      </strong>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav nav-font">
+          <a class="nav-link active text-secondary" aria-current="page"
+            href="{% url 'products:products_list' %}">HOME</a>
+          {% if not user.is_authenticated %}
+          <a class="nav-link text-secondary" href="{% url 'login' %}">LOGIN</a>
+          <a class="nav-link text-secondary" href="{% url 'signup' %}">SIGN UP</a>
+          <a class="nav-link text-secondary" href="#about_us">ABOUT US</a>
+          <a class="nav-link text-secondary" href="#galery-section">GALERY</a>
+          <a class="nav-link text-secondary" href="#contact-us">CONTACT US</a>
+          {% else %}
+          <a class="nav-link text-secondary" href="#about_us">ABOUT US</a>
+          <a class="nav-link text-secondary" href="#galery-section">GALERY</a>
+          <a class="nav-link text-secondary" href="#contact-us">CONTACT US</a>
+          <a class="nav-link text-secondary" href="{% url 'logout' %}">LOGOUT</a>
+
+          <a href="{% url 'cart:cart_detail' %}" class="nav-link text-black" style="margin-left: 20rem;"><svg
+              xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg> {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+            <a href="{% url 'cart:cart_detail' %}" class="my-2 text-secondary" style="text-decoration: none;">
+              {{ total_items }} items
+            </a>
+            {% else %}
+            0 items
+            {% endif %}
+            {% endwith %}</a>
+
+          <a href="{% url 'profile_page' request.user.phone %}" class="nav-link text-black"><svg
+              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill"
+              viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg><span> My Profile</span></a>
+
+
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner-img">
+  </div>
+
+
+  <div>
+    {% block content %}
+
+
+    {% endblock %}
+  </div>
+
+  <section id="about_us" class="about-bg pb-5">
+    <div class="container">
+      <h3 class="about-heading my-5 pt-5">Welcome to My Nursery Website</h3>
+      <div class="d-flex justify-space-between">
+        <a class="mr-5">
+          <img class="img-about" src="../static/image/pos-1.jpg">
+        </a>
+
+        <div class="about-right">
+          <p>Sit amet iaculis diam. Sed venenatis arcu eget mi malesuada tincidunt. Donec convallis quis tellus a
+            vehicula
+          </p>
+          <p>
+            Commodo eu ut leo, sit amet iaculis diam. Sed venenatis arcu eget mi malesuada tincidunt. Donec convallis
+            quis.
+          </p>
+          <p>
+            Donec a sem id arcu facilisis commodo eu ut leo, sit amet iaculis diam. Sed venenatis arcu eget mi malesuada
+            tincidunt.
+          </p>
+          <p>
+            Donec a sem id arcu facilisis commodo eu ut leo, sit amet iaculis diam. Sed venenatis arcu eget mi malesuada
+            tincidunt.
+          </p>
+          <p>
+            Sit amet iaculis diam. Sed venenatis arcu eget mi malesuada tincidunt. Donec convallis quis tellus a
+            vehicula
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section id="galery-section">
+
+    <h3 class="about-heading pt-5">Our Plants</h3>
+    <div class="container">
+      <div class="d-flex my-5">
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g1.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g2.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g3.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g4.jpg" alt="">
+          </a>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g5.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g6.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g7.jpg" alt="">
+          </a>
+        </div>
+        <div class="image-one mx-4">
+          <a>
+            <img class='img-fluid' src="../static/image/g8.jpg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+  <section id="contact-us" class="contact-us">
+    <div class="container">
+      <div class="contact-sec">
+        <div class="d-flex">
+          <div class="mr-4 c-font">
+            <p>mynursery@gmail.com</p>
+          </div>
+          <div class="mr-4 c-font">
+            <p>+ 123456789 </p>
+          </div>
+          <div class="mr-4 c-font">
+            <p>Bangalore, KA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+</body>
+</head>
