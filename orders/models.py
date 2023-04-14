@@ -5,7 +5,7 @@ from account.models import Account
 
 class Order(models.Model):
     
-    name = models.ForeignKey(Account, max_length=50, on_delete=models.CASCADE, related_name='user', blank=True, null=True)
+    name = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='user', blank=True, null=True)
     address = models.CharField(max_length=250, null=True, blank=True)
     postal_code = models.CharField(max_length=20, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
@@ -25,8 +25,7 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    
-    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE,null=True, blank=True)
+    product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=1, null=True, blank=True)
 
